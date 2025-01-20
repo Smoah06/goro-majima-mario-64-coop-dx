@@ -46,6 +46,7 @@ local PALETTE_CHAR = {
     [HAIR]   = "140800",
     [SKIN]   = "d6b89f",
     [CAP]    = "000000",
+    [EMBLEM] = "FF87A7"
 }
 
 local VOICETABLE_CHAR = {
@@ -79,7 +80,7 @@ local VOICETABLE_CHAR = {
 }
 
 if _G.charSelectExists then
-    myCharPlacement = _G.charSelect.character_add("Goro Majima", {"KIRYU CHAN!!!!", "Press B for light attack.", "Press A after light attack for heavy attac."}, "Mediocre Metastasis", {r = 176, g = 144, b = 28}, E_MODEL_MAJIMA_MODEL, CT_MARIO, get_texture_info("majima"))
+    myCharPlacement = _G.charSelect.character_add("Goro Majima", {"KIRYU CHAN!!!!", "Press B for light attack.", "Press A after light attack for heavy attack."}, "Mediocre Metastasis", {r = 176, g = 144, b = 28}, E_MODEL_MAJIMA_MODEL, CT_MARIO, get_texture_info("majima"))
 
     hook_event(HOOK_ON_MODS_LOADED, function()
         _G.charSelect.character_add_palette_preset(E_MODEL_MAJIMA_MODEL, PALETTE_CHAR)

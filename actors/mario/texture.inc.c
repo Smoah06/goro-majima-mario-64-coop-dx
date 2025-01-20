@@ -1,6 +1,11 @@
-Gfx mario_Metal_Light_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
-u8 mario_Metal_Light_rgba16_rgba16[] = {
-	#include "actors/mario/Metal_Light.rgba16.inc.c"
+Gfx mario_Metal_Light_rgba16_ci8_aligner[] = {gsSPEndDisplayList()};
+u8 mario_Metal_Light_rgba16_ci8[] = {
+	#include "actors/mario/Metal_Light.rgba16.ci8.inc.c"
+};
+
+Gfx mario_Metal_Light_rgba16_pal_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 mario_Metal_Light_rgba16_pal_rgba16[] = {
+	#include "actors/mario/Metal_Light.rgba16.pal"
 };
 
 Gfx mario_snakeskin_rgba16_aligner[] = {gsSPEndDisplayList()};
