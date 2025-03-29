@@ -20,9 +20,31 @@ function check_for_toad(m, enemyobj)
     end
 end
 
+--- @param m MarioState
+--- @param enemyobj Object
+function check_pink_bomb_on(m, enemyobj)
+    if has_action(m, {ACT_SLIDE_KICK, ACT_DIVE_SLIDE, ACT_DIVE, ACT_CHOMP, ACT_DROPKICK}) then
+        enemyobj.oToadDying = 1
+        enemyobj.oForwardVel = 20;
+        enemyobj.oVelY = 40;
+        enemyobj.oGravity = 3
+        enemyobj.oBounciness = -20
+
+        local player = nearest_player_to_object(enemyobj);
+        if (player ~= nil) then
+            enemyobj.oMoveAngleYaw = obj_angle_to_object(player, enemyobj);
+        end
+        enemyobj.oInteractStatus = 0
+    else
+        obj_mark_for_deletion(enemyobj)
+        spawn_sync_object(id_bhvExplosion, E_MODEL_EXPLOSION, enemyobj.oPosX, enemyobj.oPosY, enemyobj.oPosZ, nil)
+    end
+end
 
 majima_attack_interaction_targets = {
     [id_bhvToadMessage] = check_for_toad,
+    [id_bhvBobombBuddyOpensCannon] = check_pink_bomb_on,
+    [id_bhvBobombBuddy] = check_pink_bomb_on,
     [id_bhvMessagePanel] = check_for_toad
 }
 

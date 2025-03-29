@@ -59,3 +59,24 @@ local function bhv_custom_message_panel(panel)
 end
 
 hook_behavior(id_bhvMessagePanel, OBJ_LIST_PUSHABLE, false, nil, bhv_custom_message_panel)
+
+--- @param bomb_on Object
+local function die_bomb_on(bomb_on)
+    obj_mark_for_deletion(bomb_on)
+    spawn_sync_object(id_bhvExplosion, E_MODEL_EXPLOSION, bomb_on.oPosX, bomb_on.oPosY, bomb_on.oPosZ, nil)
+end
+
+--- @param bomb_on Object
+local function bhv_custom_pink_bomb_on(bomb_on)
+    if bomb_on.oToadDying == 1 then
+        local collisionFlags = object_step();
+        if ((collisionFlags & OBJ_COL_FLAG_GROUNDED) == OBJ_COL_FLAG_GROUNDED) then
+            die_bomb_on(bomb_on)
+        end
+
+        die_by_timer(bomb_on, die_bomb_on)
+    end
+end
+
+hook_behavior(id_bhvBobombBuddyOpensCannon, OBJ_LIST_PUSHABLE, false, nil, bhv_custom_pink_bomb_on)
+hook_behavior(id_bhvBobombBuddy, OBJ_LIST_PUSHABLE, false, nil, bhv_custom_pink_bomb_on)
