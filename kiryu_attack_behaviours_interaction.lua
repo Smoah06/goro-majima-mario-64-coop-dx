@@ -23,6 +23,7 @@ end
 
 majima_attack_interaction_targets = {
     [id_bhvToadMessage] = check_for_toad,
+    [id_bhvMessagePanel] = check_for_toad
 }
 
 --- @param m MarioState

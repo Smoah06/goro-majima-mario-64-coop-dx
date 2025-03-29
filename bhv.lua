@@ -37,3 +37,25 @@ local function bhv_custom_toad(toad)
 end
 
 hook_behavior(id_bhvToadMessage, OBJ_LIST_PUSHABLE, false, nil, bhv_custom_toad)
+
+--- @param panel Object
+local function die_panel(panel)
+    obj_mark_for_deletion(panel)
+    spawn_mist_particles();
+    spawn_triangle_break_particles(20, 138, 0.7, 3);
+    play_sound(SOUND_GENERAL_BREAK_BOX, panel.header.gfx.cameraToObject);
+end
+
+--- @param panel Object
+local function bhv_custom_message_panel(panel)
+    if panel.oToadDying == 1 then
+        local collisionFlags = object_step();
+        if ((collisionFlags & OBJ_COL_FLAG_GROUNDED) == OBJ_COL_FLAG_GROUNDED) then
+            die_panel(panel)
+        end
+
+        die_by_timer(panel, die_panel)
+    end
+end
+
+hook_behavior(id_bhvMessagePanel, OBJ_LIST_PUSHABLE, false, nil, bhv_custom_message_panel)
