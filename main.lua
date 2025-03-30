@@ -114,11 +114,11 @@ end
 
 function mario_update(m)
 
-    if gPlayerSyncTable[m.playerIndex].overwriteCharToMario then
-        gNetworkPlayers[m.playerIndex].overrideModelIndex = 0
-    else
-        gNetworkPlayers[m.playerIndex].overrideModelIndex = gNetworkPlayers[m.playerIndex].modelIndex
-    end
+    -- if gPlayerSyncTable[m.playerIndex].overwriteCharToMario then
+    --     gNetworkPlayers[m.playerIndex].overrideModelIndex = 0
+    -- else
+    --     gNetworkPlayers[m.playerIndex].overrideModelIndex = gNetworkPlayers[m.playerIndex].modelIndex
+    -- end
 
     if m.playerIndex == 0 then
         gPlayerSyncTable[0].modelId = E_MODEL_MAJIMA_MODEL
@@ -131,10 +131,13 @@ function mario_update(m)
         else
             gPlayerSyncTable[m.playerIndex].charMoveset = false
         end
+    else
+        gPlayerSyncTable[m.playerIndex].charMoveset = false
     end
-
-    if (m.action == ACT_WALKING or m.action == ACT_HOLD_WALKING) and m.forwardVel > 0 then
-        m.forwardVel = m.forwardVel * 1.05
+    if gPlayerSyncTable[m.playerIndex].charMoveset == true
+        if (m.action == ACT_WALKING or m.action == ACT_HOLD_WALKING) and m.forwardVel > 0 then
+            m.forwardVel = m.forwardVel * 1.05
+        end
     end
 
 end

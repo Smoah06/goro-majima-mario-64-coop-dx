@@ -79,7 +79,7 @@ function check_for_kingbobomb(m, enemyobj)
         obj_mark_for_deletion(enemyobj)
         local star = spawn_non_sync_object(id_bhvSpawnedStar, E_MODEL_STAR, enemyobj.oPosX, enemyobj.oPosY + 200, enemyobj.oPosZ, function(o)
         end)
-        star.oBehParams = (0x01 << 24)
+        star.oBehParams = (0x00 << 24)
         star.oInteractStatus = 0
         bhv_camera_lakitu_init()
         bhv_camera_lakitu_update()
