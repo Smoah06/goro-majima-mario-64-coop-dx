@@ -51,7 +51,7 @@ majima_attack_interaction_targets = {
 --- @param m MarioState
 --- @param interactee Object
 function on_interaction(m, interactee)
-    if (m.action & ACT_FLAG_ATTACKING) == 0 then
+    if (m.action & ACT_FLAG_ATTACKING) == 0 or not executing_majima_attack(m)  then
         return
     end
 
@@ -76,12 +76,18 @@ function allow_interact(m, interactee)
     end
     return true
 end
-hook_event(HOOK_ALLOW_INTERACT,allow_interact)
+hook_event(HOOK_ALLOW_INTERACT, allow_interact)
 --- @param m MarioState
 --- @return boolean
 function executing_strong_attack(m)
     return has_action(m, {ACT_CHOMP, ACT_DROPKICK, ACT_HEAVY_COMBO_4, ACT_HEAVY_COMBO_3, ACT_HEAVY_COMBO_2,
                           ACT_HEAVY_COMBO_1})
+end
+
+function executing_majima_attack(m)
+    return has_action(m,
+        {ACT_MAJIMA_ATTACK, ACT_COMBO_1, ACT_COMBO_2, ACT_COMBO_3, ACT_COMBO_4, ACT_CHOMP, ACT_DROPKICK,
+         ACT_HEAVY_COMBO_4, ACT_HEAVY_COMBO_3, ACT_HEAVY_COMBO_2, ACT_HEAVY_COMBO_1})
 end
 
 --- @param m MarioState
